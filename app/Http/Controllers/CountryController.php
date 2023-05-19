@@ -83,9 +83,9 @@ class CountryController extends Controller
      */
     public function destroy(Country $country)
     {
-        $story->delete();
+        $country->delete();
         return redirect()
-        ->route('country.index')
+        ->route('countries.index')
         ->with('danger', 'The countries has been deleted');
     }
 }
