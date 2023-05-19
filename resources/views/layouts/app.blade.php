@@ -30,7 +30,56 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
+                        @auth
+                        <li class="nav-item dropdown">
+                            <a style="color: darkblue" id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Countries
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a style="color: darkblue" class="dropdown-item" href="{{ route('countries.index') }}">
+                                    Countries list
+                                </a>
+                               <a style="color: darkblue" class="dropdown-item" href="{{ route('countries.create') }}">
+                                    New country
+                                </a> 
+                            </div>
+                        </li>
+                    @endauth
+                    </ul>
+                     <ul class="navbar-nav me-auto">
+                        @auth
+                        <li class="nav-item dropdown">
+                            <a style="color: darkblue" id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Orders
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a style="color: darkblue" class="dropdown-item" href="{{ route('orders.index') }}">
+                                    Orders list
+                                </a>
+                               <a style="color: darkblue" class="dropdown-item" href="{{ route('orders.create') }}">
+                                    New order
+                                </a> 
+                            </div>
+                        </li>
+                    @endauth
+                    </ul>
 
+                    <ul class="navbar-nav me-auto">
+                        @auth
+                        <li class="nav-item dropdown">
+                            <a style="color: darkblue" id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Countries
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a style="color: darkblue" class="dropdown-item" href="{{ route('countries.index') }}">
+                                    Countries list
+                                </a>
+                               <a style="color: darkblue" class="dropdown-item" href="{{ route('countries.create') }}">
+                                    New country
+                                </a> 
+                            </div>
+                        </li>
+                    @endauth
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -73,6 +122,8 @@
         </nav>
 
         <main class="py-4">
+            @include('layouts.messages')
+            @include('layouts.errors')
             @yield('content')
         </main>
     </div>
