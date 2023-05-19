@@ -39,13 +39,11 @@ class CountryController extends Controller
             'season_end' => $request->season_end,
         ]);
        
-        if($request->file('photo')) {
-            $country->update(['main_photo' => $request->file('photo')->store('photos')]);
-        }
+
 
         return redirect()
         ->route('countries.index')
-        ->with('ok', 'New story was country');
+        ->with('ok', 'New country was created');
     }
 
     /**
@@ -59,24 +57,35 @@ class CountryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Country $country)
     {
-        //
+        return view('countries.edit', ['country'=>$country]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Country $country)
     {
-        //
+    $country->update([
+        'name' => $request->name,
+        'season_start' => $request->season_start,
+        'season_end' => $request->season_end
+    ]);
+
+    return redirect()
+    ->route('countries.index')
+    ->with('info', 'The country has been updated');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Country $country)
     {
-        //
+        $story->delete();
+        return redirect()
+        ->route('country.index')
+        ->with('danger', 'The countries has been deleted');
     }
 }

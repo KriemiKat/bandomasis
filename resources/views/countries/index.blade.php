@@ -1,31 +1,42 @@
+@extends('layouts.app')
 
 @section('content')
-
-<div class='container'>
-    <div class="card">
-        <h3 class="fw-bold card-header text-center">
-            Šalių sąrašas
-        </h3>
-        <ul class="list-group">
-            @foreach($countries as $value)
-            <li class="list-group-item d-flex">
-                <div class='fw-bold col'> {{$value->name}}</div>
-                <div class='col'> {{$value->season_start}}</div>
-                <div class='col'> {{$value->season_end}}</div>
-                <div class='col'>
-                    <a href='{{route('countries-edit', $value)}}' class="btn btn-outline-primary">Redaguoti</a>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <div class="card mt-6">
+                <div class="card-header">
+                    <h1>List of Countries</h1>
                 </div>
-                <form action='{{route('countries-destroy', $value)}}' method='post' class='col'>
-                    <button type="submit" class="btn btn-outline-danger">Ištrinti</button>
-                    @method('delete')
-                    @csrf
-                </form>
-
-            </li>
-            @endforeach
-        </ul>
-    </div>
+    <ul style= "list-style: none">
+    @forelse($countries as $country)
+    
+        <li class="list-group-item" style="text-align: center">
+            <h2 style= "color: rgb(44, 44, 74)">{{$country->name}}</h2>
+            <div>{{$country->season_start}}</div>
+            <div>{{$country->season_end}}</div>
+          
+            <a href="{{ route('countries.show', $country) }}">Show more</a><br>
+            <a href="{{ route('countries.edit', $country) }}">Edit</a>
+            <form method="post" action="{{ route('countries.destroy', $country) }}">
+                <button type="submit" class="btn btn-outline-danger">Delete</button>
+                <br>
+                <hr>
+               @csrf
+               @method('delete')    
+               {{-- patch --}}
+                
+            </form>
+        </li>
+     @empty
+    <li class="list-group-item">
+        <div class="client-line">No countries yet</div>
+    </li>
+    @endforelse
+    </ul>
 </div>
-
+</div>
+</div>
+</div>
 
 @endsection
